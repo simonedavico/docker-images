@@ -36,8 +36,11 @@ for hcl in \
 		max_stale \
 		token \
 		wait \
+		splay \
+		kill_signal \
 		retry \
 		log_level \
+		pristine \
 ; do
 		var="ENVCONSUL_${hcl^^}"
 		val="${!var}"

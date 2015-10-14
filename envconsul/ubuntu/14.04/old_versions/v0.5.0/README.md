@@ -12,10 +12,8 @@ There are different versions of envconsul Docker Images, corresponding to the di
 
 ## Supported Tags/Releases
 
-- `latest`, `v0.6.0`, `latest_ubuntu`, `v0.6.0_ubuntu` ([Dockerfile](https://github.com/benchflow/docker-images/blob/master/envconsul/ubuntu/14.04/Dockerfile))
-- `latest_serverjre-7`, `v0.6.0_serverjre-7` ([Dockerfile](https://github.com/benchflow/docker-images/blob/master/envconsul/oracle-java/serverjre-7/Dockerfile))
-- `v0.5.0`, `v0.5.0_ubuntu` ([Dockerfile](https://github.com/benchflow/docker-images/blob/master/envconsul/ubuntu/14.04/old_versions/v0.5.0/Dockerfile))
-- `v0.5.0_serverjre-7` ([Dockerfile](https://github.com/benchflow/docker-images/blob/master/envconsul/oracle-java/serverjre-7/old_versions/v0.5.0/Dockerfile))
+- `latest`, `v0.5.0`, `latest_ubuntu`, `v0.5.0_ubuntu` ([Dockerfile](https://github.com/benchflow/docker-images/blob/master/envconsul/ubuntu/14.04/Dockerfile))
+- `latest_serverjre-7`, `v0.5.0_serverjre-7` ([Dockerfile](https://github.com/benchflow/docker-images/blob/master/envconsul/oracle-java/serverjre-7/Dockerfile))
 
 # How this image works? #
 
@@ -29,12 +27,9 @@ The image accepts the following environment variables mapped to the specified *c
 | `consul`*   | `ENVCONSUL_CONSUL`    | The location of the Consul instance to query (may be an IP address or FQDN) with port.                                                                                                                                             |
 | `prefix`    | `ENVCONSUL_PREFIXES`^    | A prefix to watch in Consul. This may be specified multiple times if passed as option. It is possible to pass an array of prefixes by using the ENV variable, e.g.: ENVCONSUL_PREFIXES=\\[\"global\/time\"\\]". <br>**Default**: ["/"]                                                                                                                                                                               |
 | `once` | `ENVCONSUL_ONCE` | Run envconsul once and exit (as opposed to the default behavior of daemon). <br>**Default**: disabled (false)                                                                                             |
-| `pristine` | `ENVCONSUL_PRISTINE` | Pristine indicates that we want a clean environment only composed of consul config variables, not inheriting from exising environment. <br>**Default**: disabled (false)                                                                                             |
 | `max-stale` | `ENVCONSUL_MAX_STALE` | The maximum staleness of a query. If specified, Consul will distribute work among all servers instead of just the leader. The default value is 0 (none). <br>**Default**: "10m"                                                                                              |
 | `token`     | `ENVCONSUL_TOKEN`     | The [Consul API token](http://www.consul.io/docs/internals/acl.html). There is no default value.                                                                                                                                                                                       |
-| `kill-signal`     | `ENVCONSUL_KILL_SIGNAL`     | Kill signal to send to child process. Can be one of SIGHUP,SIGTERM,SIGINT,SIGQUIT,SIGUSR1,SIGUSR2.  <br>**Default**: "SIGHUP"|
 | `wait`      | `ENVCONSUL_WAIT`      | The `minimum(:maximum)` to wait before rendering a new template to disk and triggering a command, separated by a colon (`:`). If the optional maximum value is omitted, it is assumed to be 4x the required minimum value. There is no official default value. <br>**Default**: "10s:40s" |
-| `splay`      | `ENVCONSUL_SPLAY`      | The maximum time to wait before restarting the program. Envconsul randomly choose a value between 0 and the value assigned to the splay option. <br>**Default**: "40s" |
 | `retry`     | `ENVCONSUL_RETRY`     | The amount of time to wait if Consul returns an error when communicating with the API. The official default value is 5 seconds. <br>**Default**: "10s"                                                                                                                                |
 | `sanitize`  | `ENVCONSUL_SANITIZE`  | Replace invalid characters in keys to underscores. <br>**Default**: true                                                                                                                                                                                                     |
 | `upcase`    | `ENVCONSUL_UPCASE`    | Convert all environment variable keys to uppercase. <br>**Default**: true                                                                                                                                                                                                    |
@@ -54,15 +49,12 @@ $ docker run -e "ENVCONSUL_CONSUL=demo.consul.io:80" \
              -e "ENVCONSUL_PREFIXES=\[\"global\/time\"\]" \
              -e "ENVCONSUL_MAX_STALE=20m" \
              -e "ENVCONSUL_TOKEN=" \
-             -e "ENVCONSUL_KILL_SIGNAL=SIGHUP" \
              -e "ENVCONSUL_WAIT=10s:40s" \
-             -e "ENVCONSUL_SPLAY=40s" \
              -e "ENVCONSUL_RETRY=20s" \
              -e "ENVCONSUL_SANITIZE=true" \
              -e "ENVCONSUL_UPCASE=true" \
              -e "ENVCONSUL_LOG_LEVEL=err" \
              -e "ENVCONSUL_ONCE=true" \
-             -e "ENVCONSUL_PRISTINE=false" \
              --rm \
              benchflow/envconsul:latest env
 ```
@@ -78,14 +70,11 @@ $ docker run -e "ENVCONSUL_CONSUL=demo.consul.io:80" \
 			 -prefix=global/time \
 			 -max-stale=20m \
 			 -token= \
-                   -kill-signal=SIGHUP \
 			 -wait=10s:40s \
-                   -splay=40s \
 			 -retry=20s \
 			 -sanitize=true \
 			 -upcase=true \
 			 -log-level=err \
-                   -pristine=false \
 			 -once \
              env
 ```
