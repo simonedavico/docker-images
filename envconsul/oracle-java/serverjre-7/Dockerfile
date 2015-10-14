@@ -7,7 +7,7 @@ ENV ENVCONSUL_VERSION v0.6.0
 ENV ENVCONSUL_VERSION_NUMBER 0.6.0
 
 RUN apk --update add wget bash && \
-    wget -q --no-check-certificate -O /tmp/consul.tar.gz https://github.com/hashicorp/envconsul/releases/download/${ENVCONSUL_VERSION}/envconsul_${ENVCONSUL_VERSION_NUMBER}_linux_amd64.tar.gz && \
+    wget -q --no-check-certificate -O /tmp/consul.tar.gz https://github.com/hashicorp/envconsul/releases/download/${ENVCONSUL_VERSION}/envconsul_${ENVCONSUL_VERSION_NUMBER}_linux_amd64.zip && \
     tar -xzvf /tmp/consul.tar.gz -C /usr/bin/ && \
     mv /usr/bin/envconsul_${ENVCONSUL_VERSION_NUMBER}_linux_amd64/envconsul /usr/bin/envconsul && \
     apk del --purge wget && \

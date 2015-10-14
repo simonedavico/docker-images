@@ -8,7 +8,7 @@ ENV ENVCONSUL_VERSION_NUMBER 0.6.0
 RUN \
   apt-get update && \
   apt-get install -y wget net-tools netcat && \
-  wget -q --no-check-certificate -O /tmp/consul.tar.gz https://github.com/hashicorp/envconsul/releases/download/${ENVCONSUL_VERSION}/envconsul_${ENVCONSUL_VERSION_NUMBER}_linux_amd64.tar.gz && \
+  wget -q --no-check-certificate -O /tmp/consul.tar.gz https://github.com/hashicorp/envconsul/releases/download/${ENVCONSUL_VERSION}/envconsul_${ENVCONSUL_VERSION_NUMBER}_linux_amd64.zip && \
   tar -xzvf /tmp/consul.tar.gz -C /usr/bin/ --strip-components=1 && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* *.gz
